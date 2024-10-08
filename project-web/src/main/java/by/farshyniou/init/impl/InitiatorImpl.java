@@ -1,8 +1,9 @@
-package by.farshyniou.init;
+package by.farshyniou.init.impl;
 
 
-import by.farshyniou.cat.Cat;
+import by.farshyniou.cat.CatDto;
 import by.farshyniou.exceptions.FetchingDataException;
+import by.farshyniou.init.Initiator;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
@@ -25,7 +26,7 @@ public class InitiatorImpl implements Initiator {
     public static String API_URI = "https://api.thecatapi.com/v1/images/search?limit={0}&has_breeds={1}";
 
     @Override
-    public List<Cat> initiate() {
+    public List<CatDto> initiate() {
         try (HttpClient httpClient = HttpClient.newHttpClient()) {
 
             HttpRequest apiRequest = HttpRequest.newBuilder(
@@ -35,8 +36,8 @@ public class InitiatorImpl implements Initiator {
             HttpResponse<String> apiResponse = httpClient.send(apiRequest, HttpResponse.BodyHandlers.ofString());
             String responseBody = apiResponse.body();
             ObjectMapper mapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-            Cat[] cats = mapper.readValue(responseBody, Cat[].class);
-            return Arrays.asList(cats);
+            CatDto[] catDtos = mapper.readValue(responseBody, CatDto[].class);
+            return Arrays.asList(catDtos);
         } catch (IOException | InterruptedException e) {
             LOGGER.warn("Exception occurred during fetching data from API. {}", e.getMessage());
             throw new FetchingDataException(e.getMessage());

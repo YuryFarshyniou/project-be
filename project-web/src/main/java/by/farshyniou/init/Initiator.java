@@ -1,9 +1,9 @@
 package by.farshyniou.init;
 
-import by.farshyniou.cat.Cat;
+import by.farshyniou.cat.CatDto;
 
 import java.util.List;
 
 public interface Initiator {
-    List<Cat> initiate();
+    List<CatDto> initiate();
 }

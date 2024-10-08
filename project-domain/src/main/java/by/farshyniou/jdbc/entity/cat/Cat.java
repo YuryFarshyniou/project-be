@@ -1,25 +1,16 @@
-package by.farshyniou.cat;
+package by.farshyniou.jdbc.entity.cat;
 
-
-import by.farshyniou.breed.Breed;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import  by.farshyniou.jdbc.entity.breed.Breed;
 
 import java.util.List;
 
 public class Cat {
+    private long id;
     private String url;
     private String apiId;
     private List<Breed> breeds;
 
     public Cat() {
-    }
-
-    @JsonCreator
-    public Cat(@JsonProperty("url") String url,@JsonProperty("id") String apiId,@JsonProperty("breeds") List<Breed> breeds) {
-        this.url = url;
-        this.apiId = apiId;
-        this.breeds = breeds;
     }
 
     public String getUrl() {
@@ -44,5 +35,9 @@ public class Cat {
 
     public void setBreeds(List<Breed> breeds) {
         this.breeds = breeds;
+    }
+
+    public long getId() {
+        return id;
     }
 }

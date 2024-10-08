@@ -3,7 +3,8 @@ package by.farshyniou.breed;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Breed {
+public class BreedDto {
+    private long id;
     private String breedId;
     private String name;
     private String temperament;
@@ -13,11 +14,11 @@ public class Breed {
     private String lifeSpan;
     private String wikipediaUrl;
 
-    public Breed() {
+    public BreedDto() {
     }
 
     @JsonCreator
-    public Breed(@JsonProperty("id") String breedId, @JsonProperty("name") String name, @JsonProperty("temperament") String temperament, @JsonProperty("origin")
+    public BreedDto(@JsonProperty("id") String breedId, @JsonProperty("name") String name, @JsonProperty("temperament") String temperament, @JsonProperty("origin")
     String origin, @JsonProperty("country_code") String countryCode, @JsonProperty("description") String description, @JsonProperty("life_span") String lifeSpan, @JsonProperty("wikipedia_url")
                  String wikipediaUrl) {
         this.breedId = breedId;
