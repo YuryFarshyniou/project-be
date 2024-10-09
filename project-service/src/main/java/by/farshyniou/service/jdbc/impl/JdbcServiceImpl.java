@@ -44,4 +44,50 @@ public class JdbcServiceImpl implements JdbcService {
         }
 
     }
+
+    @Override
+    public void insertIntoTables() {
+        try {
+            jdbcRepository = new JdbcRepositoryImpl();
+            jdbcRepository.insertIntoTables();
+        } catch (SQLException exception) {
+            LOGGER.debug("Exception during inserting into tables {}", exception.getMessage());
+        }
+    }
+
+    @Override
+    public void insertIntoCatTable() {
+        try {
+            jdbcRepository = new JdbcRepositoryImpl();
+            jdbcRepository.insertIntoCatTable();
+        } catch (SQLException exception) {
+            LOGGER.debug("Exception during inserting into cat table {}", exception.getMessage());
+        }
+    }
+
+    @Override
+    public void deleteFromCatTable() {
+        try {
+            jdbcRepository = new JdbcRepositoryImpl();
+            jdbcRepository.deleteFromCatTable();
+        } catch (SQLException exception) {
+            LOGGER.debug("Exception during deleting CAT table {}", exception.getMessage());
+        }
+    }
+
+    @Override
+    public void dropTables() {
+        try {
+            jdbcRepository = new JdbcRepositoryImpl();
+            jdbcRepository.dropTables();
+        } catch (SQLException exception) {
+            LOGGER.debug("Exception during dropping tables {}", exception.getMessage());
+        }
+    }
+
+    @Override
+    public void selectAllFromCatTable() {
+        jdbcRepository = new JdbcRepositoryImpl();
+        jdbcRepository.selectAllFromCatTable();
+    }
 }

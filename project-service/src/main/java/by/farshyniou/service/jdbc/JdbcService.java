@@ -7,4 +7,14 @@ public interface JdbcService {
     void createBreedTable();
 
     void createTables();
+
+    void insertIntoTables();
+
+    void insertIntoCatTable();
+
+    void deleteFromCatTable();
+
+    void dropTables();
+
+    void selectAllFromCatTable();
 }

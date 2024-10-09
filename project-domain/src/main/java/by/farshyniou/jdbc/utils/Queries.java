@@ -3,8 +3,8 @@ package by.farshyniou.jdbc.utils;
 public class Queries {
     public static final String CREATE_TABLE_BREED = """
                     Create table breed (
-            breed_id serial primary key,
-            breed_string_id varchar(255),
+            id serial primary key,
+            breed_id varchar(255),
             breed_name varchar(255),
             breed_temperament varchar(255),
             breed_origin varchar(255),
@@ -14,10 +14,34 @@ public class Queries {
             breed_wikipedia_url varchar(255))""";
 
     public static final String CREATE_TABLE_CAT = """
-                                CREATE Table cat (
-                        cat_id serial primary key,
-                        cat_url varchar(255),
-                        breed_id integer,
-                        constraint fk_breed_id FOREIGN KEY (breed_id)
-                        references breed(breed_id))""";
+                    CREATE Table cat (
+            id serial primary key,
+            cat_url varchar(255),
+            breed_id integer,
+            constraint fk_breed_id FOREIGN KEY (breed_id)
+            references breed(id))""";
+
+    public static final String INSERT_INTO_BREED = """
+                        INSERT INTO BREED (breed_id, breed_name, breed_temperament, breed_origin, breed_country_code, breed_description, breed_life_span, breed_wikipedia_url)
+            VALUES ('XFG','Pers','Angry','Belarus','22','Some','10','url')
+                        """;
+    public static final String INSERT_INTO_CAT = """
+                        INSERT INTO cat (cat_url, breed_id)
+            VALUES ('url','1'),
+        ('url3455','1')
+                        """;
+
+    public static final String DELETE_FROM_CAT = """
+            delete from cat where id = %s
+            """;
+
+    public static final String SELECT_FROM_CAT = """
+                        select * from cat 
+            left join breed on cat.breed_id = breed.id;
+                        """;
+
+    public static final String DROP_TABLES = """
+                        DROP TABLE IF EXISTS cat;
+            drop table if exists breed;
+                        """;
 }
