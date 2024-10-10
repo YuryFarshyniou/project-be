@@ -1,4 +1,4 @@
-package by.farshyniou.exceptions;
+package by.farshyniou.jdbc.exceptions;
 
 public class PropertyNotFoundException extends RuntimeException {
 

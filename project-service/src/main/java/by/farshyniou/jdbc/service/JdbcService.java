@@ -1,4 +1,8 @@
-package by.farshyniou.service.jdbc;
+package by.farshyniou.jdbc.service;
+
+import by.farshyniou.jdbc.entity.cat.Cat;
+
+import java.util.List;
 
 public interface JdbcService {
 
@@ -16,5 +20,5 @@ public interface JdbcService {
 
     void dropTables();
 
-    void selectAllFromCatTable();
+    List<Cat> selectAllFromCatTable();
 }

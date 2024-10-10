@@ -1,12 +1,14 @@
-package by.farshyniou.service.jdbc.impl;
+package by.farshyniou.jdbc.service.impl;
 
+import by.farshyniou.jdbc.entity.cat.Cat;
 import by.farshyniou.jdbc.repository.JdbcRepository;
 import by.farshyniou.jdbc.repository.impl.JdbcRepositoryImpl;
-import by.farshyniou.service.jdbc.JdbcService;
+import by.farshyniou.jdbc.service.JdbcService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public class JdbcServiceImpl implements JdbcService {
     private static final Logger LOGGER = LoggerFactory.getLogger(JdbcServiceImpl.class);
@@ -86,8 +88,8 @@ public class JdbcServiceImpl implements JdbcService {
     }
 
     @Override
-    public void selectAllFromCatTable() {
+    public List<Cat> selectAllFromCatTable() {
         jdbcRepository = new JdbcRepositoryImpl();
-        jdbcRepository.selectAllFromCatTable();
+        return jdbcRepository.selectAllFromCatTable();
     }
 }

@@ -1,6 +1,8 @@
 package by.farshyniou.jdbc.repository.impl;
 
 import by.farshyniou.jdbc.connection.JdbcConnection;
+import by.farshyniou.jdbc.converter.ResultSetToEntityConverter;
+import by.farshyniou.jdbc.entity.cat.Cat;
 import by.farshyniou.jdbc.repository.JdbcRepository;
 import by.farshyniou.jdbc.utils.Queries;
 import org.slf4j.Logger;
@@ -10,6 +12,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import static by.farshyniou.jdbc.utils.Queries.CREATE_TABLE_BREED;
 import static by.farshyniou.jdbc.utils.Queries.CREATE_TABLE_CAT;
@@ -69,25 +73,26 @@ public class JdbcRepositoryImpl implements JdbcRepository {
     }
 
     @Override
-    public void selectAllFromCatTable(){
+    public List<Cat> selectAllFromCatTable() {
+        List<Cat> cats = new ArrayList<>();
         try (Connection connection = JdbcConnection.getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(Queries.SELECT_FROM_CAT)) {
+
             while (resultSet.next()) {
-                int id = resultSet.getInt("id");
-                LOGGER.info(resultSet.getString("cat_url"));
-                LOGGER.info(resultSet.getString("breed_name"));
+                Cat cat = ResultSetToEntityConverter.convertToCat(resultSet);
+                cats.add(cat);
             }
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             LOGGER.error(e.getMessage());
         }
+        return cats;
     }
 
     @Override
     public void dropTables() throws SQLException {
-        try (Connection connection = JdbcConnection.getConnection() ;
-        Statement statement = connection.createStatement()) {
+        try (Connection connection = JdbcConnection.getConnection();
+             Statement statement = connection.createStatement()) {
             statement.execute(Queries.DROP_TABLES);
         }
     }

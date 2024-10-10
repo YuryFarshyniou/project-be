@@ -1,7 +1,9 @@
 package by.farshyniou.jdbc.repository;
 
-import java.sql.ResultSet;
+import by.farshyniou.jdbc.entity.cat.Cat;
+
 import java.sql.SQLException;
+import java.util.List;
 
 public interface JdbcRepository {
 
@@ -17,7 +19,7 @@ public interface JdbcRepository {
 
     void deleteFromCatTable() throws SQLException;
 
-    void selectAllFromCatTable();
+    List<Cat> selectAllFromCatTable();
 
     void dropTables() throws SQLException;
 

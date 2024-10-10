@@ -1,4 +1,4 @@
-package by.farshyniou.utils;
+package by.farshyniou.jdbc.utils;
 
 public interface ConfigFileReader {
     String getJDBCUrl();

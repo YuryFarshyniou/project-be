@@ -1,4 +1,4 @@
-package by.farshyniou.breed;
+package by.farshyniou.jdbc.breed;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;

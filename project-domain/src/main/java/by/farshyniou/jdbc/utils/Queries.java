@@ -1,6 +1,9 @@
 package by.farshyniou.jdbc.utils;
 
-public class Queries {
+public final class Queries {
+
+    private Queries() {}
+
     public static final String CREATE_TABLE_BREED = """
                     Create table breed (
             id serial primary key,
@@ -16,6 +19,7 @@ public class Queries {
     public static final String CREATE_TABLE_CAT = """
                     CREATE Table cat (
             id serial primary key,
+            cat_id varchar(255),
             cat_url varchar(255),
             breed_id integer,
             constraint fk_breed_id FOREIGN KEY (breed_id)
@@ -26,10 +30,10 @@ public class Queries {
             VALUES ('XFG','Pers','Angry','Belarus','22','Some','10','url')
                         """;
     public static final String INSERT_INTO_CAT = """
-                        INSERT INTO cat (cat_url, breed_id)
-            VALUES ('url','1'),
-        ('url3455','1')
-                        """;
+                            INSERT INTO cat (cat_id,cat_url, breed_id)
+                VALUES ('xhfj4','url','1'),
+            ('bggfeq11','url3455','1')
+                            """;
 
     public static final String DELETE_FROM_CAT = """
             delete from cat where id = %s

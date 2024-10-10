@@ -1,9 +1,9 @@
-package by.farshyniou.init.impl;
+package by.farshyniou.jdbc.init.impl;
 
 
-import by.farshyniou.cat.CatDto;
-import by.farshyniou.exceptions.FetchingDataException;
-import by.farshyniou.init.Initiator;
+import by.farshyniou.jdbc.cat.CatDto;
+import by.farshyniou.jdbc.exceptions.FetchingDataException;
+import by.farshyniou.jdbc.init.Initiator;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;

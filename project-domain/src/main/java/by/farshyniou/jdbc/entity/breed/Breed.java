@@ -1,5 +1,9 @@
 package by.farshyniou.jdbc.entity.breed;
 
+import by.farshyniou.jdbc.entity.cat.Cat;
+
+import java.util.List;
+
 public class Breed {
     private long id;
     private String breedId;
@@ -10,6 +14,7 @@ public class Breed {
     private String description;
     private String lifeSpan;
     private String wikipediaUrl;
+    private List<Cat> cats;
 
     public Breed() {
     }
@@ -76,5 +81,37 @@ public class Breed {
 
     public void setWikipediaUrl(String wikipediaUrl) {
         this.wikipediaUrl = wikipediaUrl;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public List<Cat> getCats() {
+        return cats;
+    }
+
+    public void setCats(List<Cat> cats) {
+        this.cats = cats;
+    }
+
+    @Override
+    public String toString() {
+        return "Breed{" +
+               "id=" + id +
+               ", breedId='" + breedId + '\'' +
+               ", name='" + name + '\'' +
+               ", temperament='" + temperament + '\'' +
+               ", origin='" + origin + '\'' +
+               ", countryCode='" + countryCode + '\'' +
+               ", description='" + description + '\'' +
+               ", lifeSpan='" + lifeSpan + '\'' +
+               ", wikipediaUrl='" + wikipediaUrl + '\'' +
+               ", cats=" + cats +
+               '}';
     }
 }

@@ -1,7 +1,7 @@
-package by.farshyniou.utils.impl;
+package by.farshyniou.jdbc.utils.impl;
 
-import by.farshyniou.exceptions.PropertyNotFoundException;
-import by.farshyniou.utils.ConfigFileReader;
+import by.farshyniou.jdbc.exceptions.PropertyNotFoundException;
+import by.farshyniou.jdbc.utils.ConfigFileReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

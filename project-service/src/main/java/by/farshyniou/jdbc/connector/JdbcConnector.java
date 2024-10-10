@@ -1,4 +1,4 @@
-package by.farshyniou.connector.jdbc;
+package by.farshyniou.jdbc.connector;
 
 import by.farshyniou.jdbc.connection.JdbcConnection;
 

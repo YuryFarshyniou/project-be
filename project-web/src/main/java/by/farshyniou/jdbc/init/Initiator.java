@@ -1,6 +1,6 @@
-package by.farshyniou.init;
+package by.farshyniou.jdbc.init;
 
-import by.farshyniou.cat.CatDto;
+import by.farshyniou.jdbc.cat.CatDto;
 
 import java.util.List;
 

@@ -7,8 +7,8 @@ import java.util.List;
 public class Cat {
     private long id;
     private String url;
-    private String apiId;
-    private List<Breed> breeds;
+    private String catId;
+    private Breed breed;
 
     public Cat() {
     }
@@ -21,23 +21,37 @@ public class Cat {
         this.url = url;
     }
 
-    public String getApiId() {
-        return apiId;
+    public String getCatId() {
+        return catId;
     }
 
-    public void setApiId(String apiId) {
-        this.apiId = apiId;
+    public void setCatId(String catId) {
+        this.catId = catId;
     }
 
-    public List<Breed> getBreeds() {
-        return breeds;
+    public Breed getBreed() {
+        return breed;
     }
 
-    public void setBreeds(List<Breed> breeds) {
-        this.breeds = breeds;
+    public void setBreed(Breed breed) {
+        this.breed = breed;
     }
 
     public long getId() {
         return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "Cat{" +
+               "id=" + id +
+               ", url='" + url + '\'' +
+               ", catId='" + catId + '\'' +
+               ", breed=" + breed +
+               '}';
     }
 }

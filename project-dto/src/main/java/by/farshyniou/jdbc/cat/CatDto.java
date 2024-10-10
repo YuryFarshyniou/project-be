@@ -1,7 +1,7 @@
-package by.farshyniou.cat;
+package by.farshyniou.jdbc.cat;
 
 
-import by.farshyniou.breed.BreedDto;
+import by.farshyniou.jdbc.breed.BreedDto;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -9,16 +9,16 @@ import java.util.List;
 
 public class CatDto {
     private String url;
-    private String apiId;
+    private String catId;
     private List<BreedDto> breedsDto;
 
     public CatDto() {
     }
 
     @JsonCreator
-    public CatDto(@JsonProperty("url") String url, @JsonProperty("id") String apiId, @JsonProperty("breeds") List<BreedDto> breedsDto) {
+    public CatDto(@JsonProperty("url") String url, @JsonProperty("id") String catId, @JsonProperty("breeds") List<BreedDto> breedsDto) {
         this.url = url;
-        this.apiId = apiId;
+        this.catId = catId;
         this.breedsDto = breedsDto;
     }
 
@@ -30,12 +30,12 @@ public class CatDto {
         this.url = url;
     }
 
-    public String getApiId() {
-        return apiId;
+    public String getCatId() {
+        return catId;
     }
 
-    public void setApiId(String apiId) {
-        this.apiId = apiId;
+    public void setCatId(String catId) {
+        this.catId = catId;
     }
 
     public List<BreedDto> getBreeds() {

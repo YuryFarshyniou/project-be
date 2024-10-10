@@ -1,7 +1,7 @@
 package by.farshyniou.jdbc.connection;
 
-import by.farshyniou.utils.ConfigFileReader;
-import by.farshyniou.utils.impl.ConfigFileReaderImpl;
+import by.farshyniou.jdbc.utils.ConfigFileReader;
+import by.farshyniou.jdbc.utils.impl.ConfigFileReaderImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
