@@ -94,4 +94,12 @@ public class BreedDto {
     public void setWikipediaUrl(String wikipediaUrl) {
         this.wikipediaUrl = wikipediaUrl;
     }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 }

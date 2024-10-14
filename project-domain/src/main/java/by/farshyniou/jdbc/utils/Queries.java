@@ -25,11 +25,11 @@ public final class Queries {
             constraint fk_breed_id FOREIGN KEY (breed_id)
             references breed(id))""";
 
-    public static final String INSERT_INTO_BREED = """
+    public static final String INSERT_INTO_BREED_EXAMPLE = """
                         INSERT INTO BREED (breed_id, breed_name, breed_temperament, breed_origin, breed_country_code, breed_description, breed_life_span, breed_wikipedia_url)
             VALUES ('XFG','Pers','Angry','Belarus','22','Some','10','url')
                         """;
-    public static final String INSERT_INTO_CAT = """
+    public static final String INSERT_INTO_CAT_EXAMPLE = """
                             INSERT INTO cat (cat_id,cat_url, breed_id)
                 VALUES ('xhfj4','url','1'),
             ('bggfeq11','url3455','1')
@@ -48,4 +48,13 @@ public final class Queries {
                         DROP TABLE IF EXISTS cat;
             drop table if exists breed;
                         """;
+
+    public static final String INSERT_INTO_CAT = """
+            INSERT INTO CAT (cat_id, cat_url, breed_id) VALUES (?,?,?)
+            """;
+    public static final String INSERT_INTO_BREED = """
+            INSERT INTO BREED (breed_id, breed_name, breed_temperament,
+                   breed_origin, breed_country_code, breed_description,
+                   breed_life_span, breed_wikipedia_url) VALUES (?,?,?,?,?,?,?,?)
+            """;
 }

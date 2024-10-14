@@ -8,7 +8,6 @@ public class Cat {
     private long id;
     private String url;
     private String catId;
-    private Breed breed;
 
     public Cat() {
     }
@@ -29,14 +28,6 @@ public class Cat {
         this.catId = catId;
     }
 
-    public Breed getBreed() {
-        return breed;
-    }
-
-    public void setBreed(Breed breed) {
-        this.breed = breed;
-    }
-
     public long getId() {
         return id;
     }
@@ -50,8 +41,6 @@ public class Cat {
         return "Cat{" +
                "id=" + id +
                ", url='" + url + '\'' +
-               ", catId='" + catId + '\'' +
-               ", breed=" + breed +
-               '}';
+               ", catId='" + catId + '\'' +'}';
     }
 }

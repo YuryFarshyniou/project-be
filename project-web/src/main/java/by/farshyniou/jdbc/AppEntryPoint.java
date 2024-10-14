@@ -1,6 +1,9 @@
 package by.farshyniou.jdbc;
 
+import by.farshyniou.jdbc.cat.CatDto;
 import by.farshyniou.jdbc.entity.cat.Cat;
+import by.farshyniou.jdbc.init.Initiator;
+import by.farshyniou.jdbc.init.impl.InitiatorImpl;
 import by.farshyniou.jdbc.service.JdbcService;
 import by.farshyniou.jdbc.service.impl.JdbcServiceImpl;
 import org.slf4j.Logger;
@@ -14,9 +17,9 @@ public class AppEntryPoint {
     public static void main(String[] args) {
         JdbcService jdbcService = new JdbcServiceImpl();
 
-//        jdbcService.createTables();
-//        Initiator initiator = new InitiatorImpl();
-//        initiator.initiate();
+        Initiator initiator = new InitiatorImpl();
+        List<CatDto> initiate = initiator.initiate();
+        jdbcService.insertIntoTablesFromApi(initiate);
 
     }
 

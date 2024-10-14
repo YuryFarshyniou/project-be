@@ -1,5 +1,6 @@
 package by.farshyniou.jdbc.service.impl;
 
+import by.farshyniou.jdbc.cat.CatDto;
 import by.farshyniou.jdbc.entity.cat.Cat;
 import by.farshyniou.jdbc.repository.JdbcRepository;
 import by.farshyniou.jdbc.repository.impl.JdbcRepositoryImpl;
@@ -51,7 +52,7 @@ public class JdbcServiceImpl implements JdbcService {
     public void insertIntoTables() {
         try {
             jdbcRepository = new JdbcRepositoryImpl();
-            jdbcRepository.insertIntoTables();
+            jdbcRepository.insertIntoTablesExample();
         } catch (SQLException exception) {
             LOGGER.debug("Exception during inserting into tables {}", exception.getMessage());
         }
@@ -61,7 +62,7 @@ public class JdbcServiceImpl implements JdbcService {
     public void insertIntoCatTable() {
         try {
             jdbcRepository = new JdbcRepositoryImpl();
-            jdbcRepository.insertIntoCatTable();
+            jdbcRepository.insertIntoTablesFromApi();
         } catch (SQLException exception) {
             LOGGER.debug("Exception during inserting into cat table {}", exception.getMessage());
         }
@@ -91,5 +92,11 @@ public class JdbcServiceImpl implements JdbcService {
     public List<Cat> selectAllFromCatTable() {
         jdbcRepository = new JdbcRepositoryImpl();
         return jdbcRepository.selectAllFromCatTable();
+    }
+
+    @Override
+    public void insertIntoTablesFromApi(List<CatDto> cats) {
+        jdbcRepository = new JdbcRepositoryImpl();
+
     }
 }

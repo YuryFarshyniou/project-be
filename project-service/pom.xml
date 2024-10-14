@@ -16,6 +16,11 @@
         <artifactId>project-domain</artifactId>
         <version>${project.version}</version>
     </dependency>
+    <dependency>
+        <groupId>by.farshyniou</groupId>
+        <artifactId>project-dto</artifactId>
+        <version>${project.version}</version>
+    </dependency>
 </dependencies>
     <properties>
         <maven.compiler.source>22</maven.compiler.source>
