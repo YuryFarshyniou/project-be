@@ -54,4 +54,13 @@ public class ConfigFileReaderImpl implements ConfigFileReader {
             throw new PropertyNotFoundException("Can't find jdbc.password property in config.properties file!");
         }
     }
+
+    public int getJDBCPoolSize() {
+         String poolSize = properties.getProperty("jdbc.connection_pool_size");
+         if (poolSize != null) {
+            return Integer.parseInt(poolSize);
+         } else {
+             throw new PropertyNotFoundException("Can't find jdbc.connection_pool_size property in config.properties file!");
+         }
+    }
 }

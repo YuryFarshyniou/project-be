@@ -8,6 +8,7 @@ import by.farshyniou.jdbc.service.JdbcService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.sql.DatabaseMetaData;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -59,16 +60,6 @@ public class JdbcServiceImpl implements JdbcService {
     }
 
     @Override
-    public void insertIntoCatTable() {
-        try {
-            jdbcRepository = new JdbcRepositoryImpl();
-            jdbcRepository.insertIntoTablesFromApi();
-        } catch (SQLException exception) {
-            LOGGER.debug("Exception during inserting into cat table {}", exception.getMessage());
-        }
-    }
-
-    @Override
     public void deleteFromCatTable() {
         try {
             jdbcRepository = new JdbcRepositoryImpl();
@@ -97,6 +88,21 @@ public class JdbcServiceImpl implements JdbcService {
     @Override
     public void insertIntoTablesFromApi(List<CatDto> cats) {
         jdbcRepository = new JdbcRepositoryImpl();
+        try {
+            jdbcRepository.insertIntoTablesFromApi(cats);
+        } catch (SQLException exception) {
+            LOGGER.debug("Exception during inserting into tables from Api {}", exception.getMessage());
+        }
+    }
 
+    @Override
+    public DatabaseMetaData getMetaData() {
+       try {
+           jdbcRepository = new JdbcRepositoryImpl();
+           return jdbcRepository.getMetaData();
+       } catch (SQLException exception) {
+           LOGGER.debug("Exception during getting MetaData {}", exception.getMessage());
+       }
+       return null;
     }
 }

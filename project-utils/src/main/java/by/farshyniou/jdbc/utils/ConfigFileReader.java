@@ -7,4 +7,6 @@ public interface ConfigFileReader {
 
     String getJDBCPassword();
 
+    int getJDBCPoolSize();
+
 }

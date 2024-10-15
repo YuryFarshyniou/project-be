@@ -9,6 +9,7 @@ import by.farshyniou.jdbc.service.impl.JdbcServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.sql.DatabaseMetaData;
 import java.util.List;
 
 public class AppEntryPoint {
@@ -16,10 +17,10 @@ public class AppEntryPoint {
 
     public static void main(String[] args) {
         JdbcService jdbcService = new JdbcServiceImpl();
-
+//        jdbcService.createTables();
         Initiator initiator = new InitiatorImpl();
-        List<CatDto> initiate = initiator.initiate();
-        jdbcService.insertIntoTablesFromApi(initiate);
+        List<CatDto> catsDto = initiator.initiate();
+        jdbcService.insertIntoTablesFromApi(catsDto);
 
     }
 

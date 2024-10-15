@@ -17,19 +17,14 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>by.farshyniou</groupId>
-            <artifactId>project-dto</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>by.farshyniou</groupId>
-            <artifactId>project-service</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <version>${jdbc.driver.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>by.farshyniou</groupId>
+            <artifactId>project-dto</artifactId>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
 

@@ -2,7 +2,8 @@ package by.farshyniou.jdbc.utils;
 
 public final class Queries {
 
-    private Queries() {}
+    private Queries() {
+    }
 
     public static final String CREATE_TABLE_BREED = """
                     Create table breed (
@@ -12,9 +13,9 @@ public final class Queries {
             breed_temperament varchar(255),
             breed_origin varchar(255),
             breed_country_code varchar(255),
-            breed_description varchar(255),
+            breed_description varchar(5000),
             breed_life_span varchar(255),
-            breed_wikipedia_url varchar(255))""";
+            breed_wikipedia_url varchar(400))""";
 
     public static final String CREATE_TABLE_CAT = """
                     CREATE Table cat (
@@ -55,6 +56,12 @@ public final class Queries {
     public static final String INSERT_INTO_BREED = """
             INSERT INTO BREED (breed_id, breed_name, breed_temperament,
                    breed_origin, breed_country_code, breed_description,
-                   breed_life_span, breed_wikipedia_url) VALUES (?,?,?,?,?,?,?,?)
+                   breed_life_span, breed_wikipedia_url) VALUES (?,?,?,?,?,?,?,?)     
+returning  id
             """;
+
+    public static final String SELECT_FROM_BREED_WITH_BREED_ID = """
+            select breed_id, id from breed where breed_id = ?
+            """;
+
 }

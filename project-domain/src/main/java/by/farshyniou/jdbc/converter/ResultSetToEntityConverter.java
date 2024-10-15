@@ -27,7 +27,6 @@ public class ResultSetToEntityConverter {
         breed.setCountryCode(BreedName.BREED_COUNTRY_CODE);
         breed.setLifeSpan(BreedName.BREED_LIFE_SPAN);
         breed.setWikipediaUrl(BreedName.BREED_WIKIPEDIA_URL);
-        cat.setBreed(breed);
         return cat;
     }
 

@@ -4,8 +4,6 @@ import by.farshyniou.jdbc.breed.BreedDto;
 import by.farshyniou.jdbc.cat.CatDto;
 import by.farshyniou.jdbc.connection.JdbcConnection;
 import by.farshyniou.jdbc.converter.ResultSetToEntityConverter;
-import by.farshyniou.jdbc.converter.to_entity.ToEntityConverter;
-import by.farshyniou.jdbc.entity.breed.Breed;
 import by.farshyniou.jdbc.entity.cat.Cat;
 import by.farshyniou.jdbc.repository.JdbcRepository;
 import by.farshyniou.jdbc.utils.Queries;
@@ -58,14 +56,6 @@ public class JdbcRepositoryImpl implements JdbcRepository {
     }
 
     @Override
-    public void insertIntoTablesFromApi() throws SQLException {
-        try (Connection connection = JdbcConnection.getConnection();
-             Statement statement = connection.createStatement()) {
-            statement.executeUpdate(Queries.INSERT_INTO_CAT_EXAMPLE);
-        }
-    }
-
-    @Override
     public void deleteFromCatTable() throws SQLException {
         try (Connection connection = JdbcConnection.getConnection();
              Statement statement = connection.createStatement()) {
@@ -102,13 +92,15 @@ public class JdbcRepositoryImpl implements JdbcRepository {
     public void insertIntoTablesFromApi(List<CatDto> catsDto) throws SQLException {
 
         try (Connection connection = JdbcConnection.getConnection()) {
-            List<Breed> breeds = new ArrayList<>();
             catsDto.forEach(dto -> {
-                BreedDto breedDto = dto.getBreeds().getFirst();
-                if (breeds.stream().filter(breed -> breedDto.getBreedId().equals(breed.getBreedId()))
-                        .findFirst().isEmpty()) {
-
-                    try {
+                try {
+                    BreedDto breedDto = dto.getBreeds().getFirst();
+                    PreparedStatement selectFromBreedStatement = connection.prepareStatement(Queries.SELECT_FROM_BREED_WITH_BREED_ID);
+                    selectFromBreedStatement.setFetchSize(5);
+                    selectFromBreedStatement.setString(1, breedDto.getBreedId());
+                    ResultSet selectResulSet = selectFromBreedStatement.executeQuery();
+                    Integer breedId = null;
+                    if (!selectResulSet.next()) {
                         PreparedStatement preparedStatement = connection.prepareStatement(Queries.INSERT_INTO_BREED);
                         preparedStatement.setString(1, breedDto.getBreedId());
                         preparedStatement.setString(2, breedDto.getName());
@@ -118,21 +110,39 @@ public class JdbcRepositoryImpl implements JdbcRepository {
                         preparedStatement.setString(6, breedDto.getDescription());
                         preparedStatement.setString(7, breedDto.getLifeSpan());
                         preparedStatement.setString(8, breedDto.getWikipediaUrl());
-                        preparedStatement.executeUpdate();
-                        ResultSet keys = preparedStatement.getGeneratedKeys();
-                        if (keys.next()) {
-                            int breedId = keys.getInt(1);
+                        preparedStatement.execute();
+                        ResultSet id = preparedStatement.getResultSet();
+                        if (id.next()) {
+                            breedId = id.getInt(1);
                             breedDto.setId(breedId);
                         }
-
-
-                    } catch (SQLException e) {
-                        LOGGER.error(e.getMessage());
+                        LOGGER.info("Breed with id = {}  was added to db", breedDto.getBreedId());
+                        preparedStatement.close();
+                    } else {
+                        breedId = selectResulSet.getInt("id");
                     }
-                    breeds.add(ToEntityConverter.toBreedEntity(breedDto));
+                    PreparedStatement insertIntoCatStatement = connection.prepareStatement(Queries.INSERT_INTO_CAT);
+                    insertIntoCatStatement.setString(1, dto.getCatId());
+                    insertIntoCatStatement.setString(2, dto.getUrl());
+                    insertIntoCatStatement.setInt(3, breedId);
+                    insertIntoCatStatement.executeUpdate();
+                    LOGGER.info("Cat with id = {}  was added to db with breed = {}", dto.getCatId(), breedDto.getBreedId());
+                    selectFromBreedStatement.close();
+                    insertIntoCatStatement.close();
+                } catch (SQLException e) {
+                    LOGGER.error(e.getMessage());
                 }
             });
         }
+    }
+
+    @Override
+    public DatabaseMetaData getMetaData() throws SQLException {
+        DatabaseMetaData metaData;
+        try (Connection connection = JdbcConnection.getConnection()) {
+            metaData = connection.getMetaData();
+        }
+        return metaData;
     }
 
 
