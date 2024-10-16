@@ -14,4 +14,5 @@ public class BreedName extends EntityName {
     public static final String BREED_COUNTRY_CODE = "breed_country_code";
     public static final String BREED_LIFE_SPAN = "breed_life_span";
     public static final String BREED_WIKIPEDIA_URL = "breed_wikipedia_url";
+
 }

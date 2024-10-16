@@ -1,5 +1,6 @@
 package by.farshyniou.jdbc;
 
+import by.farshyniou.jdbc.breed.BreedDto;
 import by.farshyniou.jdbc.cat.CatDto;
 import by.farshyniou.jdbc.entity.cat.Cat;
 import by.farshyniou.jdbc.init.Initiator;
@@ -16,11 +17,15 @@ public class AppEntryPoint {
     private static final Logger LOGGER = LoggerFactory.getLogger(AppEntryPoint.class);
 
     public static void main(String[] args) {
-        JdbcService jdbcService = new JdbcServiceImpl();
-//        jdbcService.createTables();
-        Initiator initiator = new InitiatorImpl();
-        List<CatDto> catsDto = initiator.initiate();
-        jdbcService.insertIntoTablesFromApi(catsDto);
+        BreedDto breedDto = new BreedDto();
+        breedDto.setId(5);
+        CatDto catDto = new CatDto("hun", "hui_id", List.of(breedDto));
+        catDto.setId(7);
+        boolean b = JdbcServiceImpl.getInstance().updateCat(catDto);
+        LOGGER.info(String.valueOf(b));
+//        Initiator initiator = new InitiatorImpl();
+//        List<CatDto> catsDto = initiator.initiate();
+//        jdbcService.insertIntoTablesFromApi(catsDto);
 
     }
 

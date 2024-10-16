@@ -37,7 +37,7 @@ public final class Queries {
                             """;
 
     public static final String DELETE_FROM_CAT = """
-            delete from cat where id = %s
+            delete from cat where id = ?
             """;
 
     public static final String SELECT_FROM_CAT = """
@@ -56,12 +56,21 @@ public final class Queries {
     public static final String INSERT_INTO_BREED = """
             INSERT INTO BREED (breed_id, breed_name, breed_temperament,
                    breed_origin, breed_country_code, breed_description,
-                   breed_life_span, breed_wikipedia_url) VALUES (?,?,?,?,?,?,?,?)     
-returning  id
+                   breed_life_span, breed_wikipedia_url) VALUES (?,?,?,?,?,?,?,?) """;
+
+    public static final String SELECT_BREED_ID_ID_FROM_BREED_WITH_BREED_ID = """
+            select breed_id, id from breed where breed_id = ?
             """;
 
     public static final String SELECT_FROM_BREED_WITH_BREED_ID = """
-            select breed_id, id from breed where breed_id = ?
-            """;
+                        select id, breed_id, breed_name, breed_temperament,
+                               breed_origin, breed_country_code, breed_description,
+                               breed_life_span, breed_wikipedia_url from breed
+            where id = ?
+                        """;
+    public static final String UPDATE_CAT = """
+                        update cat set cat_id = ?, cat_url = ?, breed_id = ?
+            where id = ?
+                        """;
 
 }

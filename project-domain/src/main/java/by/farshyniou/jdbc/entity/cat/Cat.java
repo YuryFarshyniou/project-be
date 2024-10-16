@@ -5,9 +5,10 @@ import  by.farshyniou.jdbc.entity.breed.Breed;
 import java.util.List;
 
 public class Cat {
-    private long id;
+    private int id;
     private String url;
     private String catId;
+    private int breedId;
 
     public Cat() {
     }
@@ -28,12 +29,20 @@ public class Cat {
         this.catId = catId;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
+    }
+
+    public int getBreedId() {
+        return breedId;
+    }
+
+    public void setBreedId(int breedId) {
+        this.breedId = breedId;
     }
 
     @Override

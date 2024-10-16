@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class BreedDto {
-    private long id;
+    private int id;
     private String breedId;
     private String name;
     private String temperament;
@@ -95,11 +95,26 @@ public class BreedDto {
         this.wikipediaUrl = wikipediaUrl;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "BreedDto{" +
+               "id=" + id +
+               ", breedId='" + breedId + '\'' +
+               ", name='" + name + '\'' +
+               ", temperament='" + temperament + '\'' +
+               ", origin='" + origin + '\'' +
+               ", countryCode='" + countryCode + '\'' +
+               ", description='" + description + '\'' +
+               ", lifeSpan='" + lifeSpan + '\'' +
+               ", wikipediaUrl='" + wikipediaUrl + '\'' +
+               '}';
     }
 }

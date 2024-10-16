@@ -1,108 +1,88 @@
 package by.farshyniou.jdbc.service.impl;
 
+import by.farshyniou.jdbc.breed.BreedDto;
 import by.farshyniou.jdbc.cat.CatDto;
+import by.farshyniou.jdbc.converter.to_dto.ToDtoConverter;
+import by.farshyniou.jdbc.converter.to_entity.ToEntityConverter;
+import by.farshyniou.jdbc.entity.breed.Breed;
 import by.farshyniou.jdbc.entity.cat.Cat;
-import by.farshyniou.jdbc.repository.JdbcRepository;
+import by.farshyniou.jdbc.exception.EntityNotFoundException;
 import by.farshyniou.jdbc.repository.impl.JdbcRepositoryImpl;
 import by.farshyniou.jdbc.service.JdbcService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.DatabaseMetaData;
-import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
-public class JdbcServiceImpl implements JdbcService {
+public final class JdbcServiceImpl implements JdbcService {
     private static final Logger LOGGER = LoggerFactory.getLogger(JdbcServiceImpl.class);
-    private JdbcRepository jdbcRepository;
+    private static final JdbcService INSTANCE = new JdbcServiceImpl();
 
+    public static JdbcService getInstance() {
+        return INSTANCE;
+    }
 
     @Override
     public void createCatTable() {
-        try {
-            jdbcRepository = new JdbcRepositoryImpl();
-            jdbcRepository.createCatTable();
-        } catch (SQLException exception) {
-            LOGGER.debug("Exception during creating CAT table {}", exception.getMessage());
-        }
+        JdbcRepositoryImpl.getInstance().createCatTable();
 
     }
 
     @Override
     public void createBreedTable() {
-        try {
-            jdbcRepository = new JdbcRepositoryImpl();
-            jdbcRepository.createBreedTable();
-        } catch (SQLException exception) {
-            LOGGER.debug("Exception during creating BREED table {}", exception.getMessage());
-        }
+        JdbcRepositoryImpl.getInstance().createBreedTable();
     }
 
     @Override
     public void createTables() {
-        try {
-            jdbcRepository = new JdbcRepositoryImpl();
-            jdbcRepository.createTables();
-        } catch (SQLException exception) {
-            LOGGER.debug("Exception during creating tables {}", exception.getMessage());
-        }
-
+        JdbcRepositoryImpl.getInstance().createTables();
     }
 
     @Override
     public void insertIntoTables() {
-        try {
-            jdbcRepository = new JdbcRepositoryImpl();
-            jdbcRepository.insertIntoTablesExample();
-        } catch (SQLException exception) {
-            LOGGER.debug("Exception during inserting into tables {}", exception.getMessage());
-        }
+        JdbcRepositoryImpl.getInstance().insertIntoTablesExample();
     }
 
     @Override
-    public void deleteFromCatTable() {
-        try {
-            jdbcRepository = new JdbcRepositoryImpl();
-            jdbcRepository.deleteFromCatTable();
-        } catch (SQLException exception) {
-            LOGGER.debug("Exception during deleting CAT table {}", exception.getMessage());
-        }
+    public Long deleteFromCatTable(Long catId) {
+        return JdbcRepositoryImpl.getInstance().deleteFromCatTable(catId);
     }
 
     @Override
     public void dropTables() {
-        try {
-            jdbcRepository = new JdbcRepositoryImpl();
-            jdbcRepository.dropTables();
-        } catch (SQLException exception) {
-            LOGGER.debug("Exception during dropping tables {}", exception.getMessage());
-        }
+        JdbcRepositoryImpl.getInstance().dropTables();
     }
 
     @Override
     public List<Cat> selectAllFromCatTable() {
-        jdbcRepository = new JdbcRepositoryImpl();
-        return jdbcRepository.selectAllFromCatTable();
+        return JdbcRepositoryImpl.getInstance().selectAllFromCatTable();
     }
 
     @Override
     public void insertIntoTablesFromApi(List<CatDto> cats) {
-        jdbcRepository = new JdbcRepositoryImpl();
-        try {
-            jdbcRepository.insertIntoTablesFromApi(cats);
-        } catch (SQLException exception) {
-            LOGGER.debug("Exception during inserting into tables from Api {}", exception.getMessage());
-        }
+        JdbcRepositoryImpl.getInstance().insertIntoTablesFromApi(cats);
+
     }
 
     @Override
     public DatabaseMetaData getMetaData() {
-       try {
-           jdbcRepository = new JdbcRepositoryImpl();
-           return jdbcRepository.getMetaData();
-       } catch (SQLException exception) {
-           LOGGER.debug("Exception during getting MetaData {}", exception.getMessage());
-       }
-       return null;
+        return JdbcRepositoryImpl.getInstance().getMetaData();
+    }
+
+    @Override
+    public BreedDto selectBreedById(Integer breedId) {
+        Optional<Breed> breed = JdbcRepositoryImpl.getInstance().selectFromBreedById(breedId);
+        if (breed.isPresent()) {
+            return ToDtoConverter.convertToBreedDto(breed.get());
+        } else {
+            throw new EntityNotFoundException("Breed entity hasn't been found with id: " + breedId);
+        }
+    }
+
+    @Override
+    public boolean updateCat(CatDto catDto) {
+        return JdbcRepositoryImpl.getInstance().updateCat(ToEntityConverter.toCatEntity(catDto));
     }
 }

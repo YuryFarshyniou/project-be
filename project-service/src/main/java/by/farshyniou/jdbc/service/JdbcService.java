@@ -1,5 +1,6 @@
 package by.farshyniou.jdbc.service;
 
+import by.farshyniou.jdbc.breed.BreedDto;
 import by.farshyniou.jdbc.cat.CatDto;
 import by.farshyniou.jdbc.entity.cat.Cat;
 
@@ -16,7 +17,7 @@ public interface JdbcService {
 
     void insertIntoTables();
 
-    void deleteFromCatTable();
+    Long deleteFromCatTable(Long catId);
 
     void dropTables();
 
@@ -25,4 +26,8 @@ public interface JdbcService {
     void insertIntoTablesFromApi(List<CatDto> cats);
 
     DatabaseMetaData getMetaData();
+
+    BreedDto selectBreedById(Integer breedId);
+
+    boolean updateCat(CatDto catDto);
 }

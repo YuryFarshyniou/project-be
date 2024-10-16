@@ -3,30 +3,35 @@ package by.farshyniou.jdbc.repository;
 import by.farshyniou.jdbc.cat.CatDto;
 import by.farshyniou.jdbc.entity.cat.Cat;
 
+import by.farshyniou.jdbc.entity.breed.Breed;
 
 import java.sql.DatabaseMetaData;
-import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 public interface JdbcRepository {
 
-    void createCatTable() throws SQLException;
+    void createCatTable() ;
 
-    void createBreedTable() throws SQLException;
+    void createBreedTable() ;
 
-    void createTables() throws SQLException;
+    void createTables() ;
 
-    void insertIntoTablesExample() throws SQLException;
+    void insertIntoTablesExample() ;
 
-    void deleteFromCatTable() throws SQLException;
+    Long deleteFromCatTable(Long catId) ;
 
     List<Cat> selectAllFromCatTable();
 
-    void dropTables() throws SQLException;
+    void dropTables();
 
-    void insertIntoTablesFromApi(List<CatDto> cats) throws SQLException;
+    void insertIntoTablesFromApi(List<CatDto> cats);
 
-    DatabaseMetaData getMetaData() throws SQLException;
+    DatabaseMetaData getMetaData();
+
+    Optional<Breed> selectFromBreedById(Integer breedId);
+
+    Boolean updateCat(Cat cat);
 
 
 }

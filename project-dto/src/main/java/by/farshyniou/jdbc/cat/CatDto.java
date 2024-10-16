@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 public class CatDto {
+    private int id;
     private String url;
     private String catId;
     private List<BreedDto> breedsDto;
@@ -43,6 +44,22 @@ public class CatDto {
     }
 
     public void setBreeds(List<BreedDto> breedsDto) {
+        this.breedsDto = breedsDto;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public List<BreedDto> getBreedsDto() {
+        return breedsDto;
+    }
+
+    public void setBreedsDto(List<BreedDto> breedsDto) {
         this.breedsDto = breedsDto;
     }
 }
