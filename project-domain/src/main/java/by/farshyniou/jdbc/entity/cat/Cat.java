@@ -1,9 +1,5 @@
 package by.farshyniou.jdbc.entity.cat;
 
-import  by.farshyniou.jdbc.entity.breed.Breed;
-
-import java.util.List;
-
 public class Cat {
     private int id;
     private String url;
@@ -50,6 +46,6 @@ public class Cat {
         return "Cat{" +
                "id=" + id +
                ", url='" + url + '\'' +
-               ", catId='" + catId + '\'' +'}';
+               ", catId='" + catId + '\'' + '}';
     }
 }

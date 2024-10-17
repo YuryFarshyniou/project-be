@@ -73,4 +73,9 @@ public final class Queries {
             where id = ?
                         """;
 
+    public static final String SELECT_ALL_FROM_BREED = """
+                        SELECT id, breed_id, breed_name, breed_temperament, breed_origin, breed_country_code, breed_description, breed_life_span, breed_wikipedia_url
+            FROM breed 
+                        """;
+
 }

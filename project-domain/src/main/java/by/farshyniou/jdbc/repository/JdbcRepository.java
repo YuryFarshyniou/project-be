@@ -1,9 +1,10 @@
 package by.farshyniou.jdbc.repository;
 
 import by.farshyniou.jdbc.cat.CatDto;
-import by.farshyniou.jdbc.entity.cat.Cat;
-
 import by.farshyniou.jdbc.entity.breed.Breed;
+import by.farshyniou.jdbc.entity.cat.Cat;
+import by.farshyniou.jdbc.entity.filter.breed.BreedFilter;
+
 
 import java.sql.DatabaseMetaData;
 import java.util.List;
@@ -11,15 +12,15 @@ import java.util.Optional;
 
 public interface JdbcRepository {
 
-    void createCatTable() ;
+    void createCatTable();
 
-    void createBreedTable() ;
+    void createBreedTable();
 
-    void createTables() ;
+    void createTables();
 
-    void insertIntoTablesExample() ;
+    void insertIntoTablesExample();
 
-    Long deleteFromCatTable(Long catId) ;
+    Long deleteFromCatTable(Long catId);
 
     List<Cat> selectAllFromCatTable();
 
@@ -32,6 +33,8 @@ public interface JdbcRepository {
     Optional<Breed> selectFromBreedById(Integer breedId);
 
     Boolean updateCat(Cat cat);
+
+    Optional<List<Breed>> findAllBreedWithFilter(BreedFilter breedFilter);
 
 
 }

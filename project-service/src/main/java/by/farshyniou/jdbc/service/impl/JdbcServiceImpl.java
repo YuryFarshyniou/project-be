@@ -7,12 +7,14 @@ import by.farshyniou.jdbc.converter.to_entity.ToEntityConverter;
 import by.farshyniou.jdbc.entity.breed.Breed;
 import by.farshyniou.jdbc.entity.cat.Cat;
 import by.farshyniou.jdbc.exception.EntityNotFoundException;
+import by.farshyniou.jdbc.filter.BreedFilterDto;
 import by.farshyniou.jdbc.repository.impl.JdbcRepositoryImpl;
 import by.farshyniou.jdbc.service.JdbcService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.DatabaseMetaData;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -84,5 +86,17 @@ public final class JdbcServiceImpl implements JdbcService {
     @Override
     public boolean updateCat(CatDto catDto) {
         return JdbcRepositoryImpl.getInstance().updateCat(ToEntityConverter.toCatEntity(catDto));
+    }
+
+    @Override
+    public List<BreedDto> findAllFromBreedWithFilter(BreedFilterDto breedFilterDto) {
+        Optional<List<Breed>> allBreedWithFilter = JdbcRepositoryImpl.getInstance().findAllBreedWithFilter(ToEntityConverter.toBreedFilterEntity(breedFilterDto));
+        if (allBreedWithFilter.get().size() > 0) {
+            List<BreedDto> breeds = new ArrayList<>();
+            allBreedWithFilter.get().forEach(breed -> breeds.add(ToDtoConverter.convertToBreedDto(breed)));
+            return breeds;
+        } else {
+            throw new EntityNotFoundException("There aren't any Breed in the db for this criteria");
+        }
     }
 }
