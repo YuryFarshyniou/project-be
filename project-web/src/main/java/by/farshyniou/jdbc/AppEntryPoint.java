@@ -23,7 +23,7 @@ public class AppEntryPoint {
                 null,
                 null,
                 null,
-                "Agile");
+                null);
         List<BreedDto> allFromBreedWithFilter = JdbcServiceImpl.getInstance().findAllFromBreedWithFilter(breedFilterDto);
         allFromBreedWithFilter.forEach(System.out::println);
 //        Initiator initiator = new InitiatorImpl();

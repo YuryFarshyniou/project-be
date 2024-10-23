@@ -28,7 +28,7 @@ public final class JdbcServiceImpl implements JdbcService {
 
     @Override
     public void createCatTable() {
-        JdbcRepositoryImpl.getInstance().createCatTable();
+        JdbcRepositoryImpl.getInstance().createTable();
 
     }
 
@@ -49,7 +49,7 @@ public final class JdbcServiceImpl implements JdbcService {
 
     @Override
     public Long deleteFromCatTable(Long catId) {
-        return JdbcRepositoryImpl.getInstance().deleteFromCatTable(catId);
+        return JdbcRepositoryImpl.getInstance().delete(catId);
     }
 
     @Override
@@ -59,7 +59,7 @@ public final class JdbcServiceImpl implements JdbcService {
 
     @Override
     public List<Cat> selectAllFromCatTable() {
-        return JdbcRepositoryImpl.getInstance().selectAllFromCatTable();
+        return JdbcRepositoryImpl.getInstance().findAll();
     }
 
     @Override
@@ -75,7 +75,7 @@ public final class JdbcServiceImpl implements JdbcService {
 
     @Override
     public BreedDto selectBreedById(Integer breedId) {
-        Optional<Breed> breed = JdbcRepositoryImpl.getInstance().selectFromBreedById(breedId);
+        Optional<Breed> breed = JdbcRepositoryImpl.getInstance().selectById(breedId);
         if (breed.isPresent()) {
             return ToDtoConverter.convertToBreedDto(breed.get());
         } else {
@@ -85,15 +85,15 @@ public final class JdbcServiceImpl implements JdbcService {
 
     @Override
     public boolean updateCat(CatDto catDto) {
-        return JdbcRepositoryImpl.getInstance().updateCat(ToEntityConverter.toCatEntity(catDto));
+        return JdbcRepositoryImpl.getInstance().update(ToEntityConverter.toCatEntity(catDto));
     }
 
     @Override
     public List<BreedDto> findAllFromBreedWithFilter(BreedFilterDto breedFilterDto) {
-        Optional<List<Breed>> allBreedWithFilter = JdbcRepositoryImpl.getInstance().findAllBreedWithFilter(ToEntityConverter.toBreedFilterEntity(breedFilterDto));
-        if (allBreedWithFilter.get().size() > 0) {
+       List<Breed> allBreedWithFilter = JdbcRepositoryImpl.getInstance().findAllWithFilter(ToEntityConverter.toBreedFilterEntity(breedFilterDto));
+        if (!allBreedWithFilter.isEmpty()) {
             List<BreedDto> breeds = new ArrayList<>();
-            allBreedWithFilter.get().forEach(breed -> breeds.add(ToDtoConverter.convertToBreedDto(breed)));
+            allBreedWithFilter.forEach(breed -> breeds.add(ToDtoConverter.convertToBreedDto(breed)));
             return breeds;
         } else {
             throw new EntityNotFoundException("There aren't any Breed in the db for this criteria");
