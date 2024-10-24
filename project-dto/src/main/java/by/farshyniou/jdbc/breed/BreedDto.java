@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class BreedDto {
-    private int id;
+    private Long id;
     private String breedId;
     private String name;
     private String temperament;
@@ -20,7 +20,7 @@ public class BreedDto {
     @JsonCreator
     public BreedDto(@JsonProperty("id") String breedId, @JsonProperty("name") String name, @JsonProperty("temperament") String temperament, @JsonProperty("origin")
     String origin, @JsonProperty("country_code") String countryCode, @JsonProperty("description") String description, @JsonProperty("life_span") String lifeSpan, @JsonProperty("wikipedia_url")
-                 String wikipediaUrl) {
+                    String wikipediaUrl) {
         this.breedId = breedId;
         this.name = name;
         this.temperament = temperament;
@@ -95,11 +95,11 @@ public class BreedDto {
         this.wikipediaUrl = wikipediaUrl;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

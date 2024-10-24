@@ -1,7 +1,7 @@
 package by.farshyniou.jdbc.init.impl;
 
 
-import by.farshyniou.jdbc.cat.CatDto;
+import by.farshyniou.jdbc.cat_api.CatApi;
 import by.farshyniou.jdbc.exceptions.FetchingDataException;
 import by.farshyniou.jdbc.init.Initiator;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -26,7 +26,7 @@ public class InitiatorImpl implements Initiator {
     public static String API_URI = "https://api.thecatapi.com/v1/images/search?limit={0}&has_breeds={1}";
 
     @Override
-    public List<CatDto> initiate() {
+    public List<CatApi> initiate() {
         try (HttpClient httpClient = HttpClient.newHttpClient()) {
 
             HttpRequest apiRequest = HttpRequest.newBuilder(
@@ -36,8 +36,8 @@ public class InitiatorImpl implements Initiator {
             HttpResponse<String> apiResponse = httpClient.send(apiRequest, HttpResponse.BodyHandlers.ofString());
             String responseBody = apiResponse.body();
             ObjectMapper mapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-            CatDto[] catDtos = mapper.readValue(responseBody, CatDto[].class);
-            return Arrays.asList(catDtos);
+            CatApi[] catApis = mapper.readValue(responseBody, CatApi[].class);
+            return Arrays.asList(catApis);
         } catch (IOException | InterruptedException e) {
             LOGGER.warn("Exception occurred during fetching data from API. {}", e.getMessage());
             throw new FetchingDataException(e.getMessage());
@@ -45,9 +45,6 @@ public class InitiatorImpl implements Initiator {
     }
 
     private String returnUri() {
-        Map<String, String> uriParams = new HashMap<>();
-        uriParams.put("limit", "20");
-        uriParams.put("has_breeds", "1");
-        return MessageFormat.format(API_URI, "20", "1", API_KEY);
+        return MessageFormat.format(API_URI, "20", "1");
     }
 }

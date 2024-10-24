@@ -14,18 +14,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static by.farshyniou.jdbc.utils.Queries.CREATE_TABLE_BREED;
 import static by.farshyniou.jdbc.utils.Queries.CREATE_TABLE_CAT;
 
-public class CatJdbcRepository implements JdbcRepository<Long, Cat> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(CatJdbcRepository.class.getName());
-    private static final JdbcRepository<Long, Cat> INSTANCE = new CatJdbcRepository();
+public class CatJdbcRepositoryImpl implements JdbcRepository<Long, Cat> {
+    private static final Logger LOGGER = LoggerFactory.getLogger(CatJdbcRepositoryImpl.class.getName());
+    private static final JdbcRepository<Long, Cat> INSTANCE = new CatJdbcRepositoryImpl();
 
     public static JdbcRepository<Long, Cat> getInstance() {
         return INSTANCE;
     }
 
-    private CatJdbcRepository() {
+    private CatJdbcRepositoryImpl() {
     }
 
     @Override
@@ -35,28 +34,6 @@ public class CatJdbcRepository implements JdbcRepository<Long, Cat> {
             statement.execute(CREATE_TABLE_CAT);
         } catch (SQLException e) {
             LOGGER.error("Error during creating Cat table, {}", e.getMessage());
-        }
-    }
-
-    @Override
-    public void createTables() {
-        try (Connection connection = JdbcConnection.getConnection();
-             Statement statement = connection.createStatement()) {
-            statement.execute(CREATE_TABLE_BREED);
-            statement.execute(CREATE_TABLE_CAT);
-        } catch (SQLException e) {
-            LOGGER.error("Error during creating tables, {}", e.getMessage());
-        }
-    }
-
-    @Override
-    public void insertIntoTablesExample() {
-        try (Connection connection = JdbcConnection.getConnection();
-             Statement statement = connection.createStatement()) {
-            statement.executeUpdate(Queries.INSERT_INTO_BREED_EXAMPLE);
-            statement.executeUpdate(Queries.INSERT_INTO_CAT_EXAMPLE);
-        } catch (SQLException e) {
-            LOGGER.error("Error during inserting into tables example values, {}", e.getMessage());
         }
     }
 
@@ -99,17 +76,6 @@ public class CatJdbcRepository implements JdbcRepository<Long, Cat> {
     }
 
     @Override
-    public void dropTables() {
-        try (Connection connection = JdbcConnection.getConnection();
-             Statement statement = connection.createStatement()) {
-            statement.execute(Queries.DROP_TABLES);
-        } catch (SQLException exception) {
-            LOGGER.error("Error during dropping tables, {}", exception.getMessage());
-            throw new RepositoryException(exception.getMessage());
-        }
-    }
-
-    @Override
     public DatabaseMetaData getMetaData() {
         DatabaseMetaData metaData;
         try (Connection connection = JdbcConnection.getConnection()) {
@@ -122,7 +88,7 @@ public class CatJdbcRepository implements JdbcRepository<Long, Cat> {
     }
 
     @Override
-    public Optional<Cat> selectById(Long id) {
+    public Optional<Cat> findById(Long id) {
         return Optional.empty();
     }
 
@@ -132,8 +98,8 @@ public class CatJdbcRepository implements JdbcRepository<Long, Cat> {
              PreparedStatement prStatement = connection.prepareStatement(Queries.UPDATE_CAT)) {
             prStatement.setString(1, cat.getCatId());
             prStatement.setString(2, cat.getUrl());
-            prStatement.setInt(3, cat.getBreedId());
-            prStatement.setInt(4, cat.getId());
+            prStatement.setLong(3, cat.getBreedId());
+            prStatement.setLong(4, cat.getId());
             return prStatement.executeUpdate() > 0;
         } catch (SQLException exception) {
             LOGGER.error("Error during updating Cat with id={}, {}", cat.getId(), exception.getMessage());

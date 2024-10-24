@@ -13,7 +13,7 @@ public class ToEntityConverter {
         Cat cat = new Cat();
         cat.setCatId(catDto.getCatId());
         cat.setUrl(catDto.getUrl());
-        cat.setBreedId(catDto.getBreeds().getFirst().getId());
+        cat.setBreedId(catDto.getBreedId());
         if (catDto.getId() != 0) {
             cat.setId(catDto.getId());
         }

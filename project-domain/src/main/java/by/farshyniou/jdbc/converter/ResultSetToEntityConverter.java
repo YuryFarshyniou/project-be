@@ -18,7 +18,7 @@ public class ResultSetToEntityConverter {
         cat.setCatId(resultSet.getString(CatName.CAT_ID));
         cat.setUrl(resultSet.getString(CatName.CAT_URL));
         Breed breed = new Breed();
-        breed.setId(resultSet.getInt(4));
+        breed.setId(resultSet.getLong(4));
         breed.setBreedId(resultSet.getString(BreedName.BREED_ID));
         breed.setName(BreedName.BREED_NAME);
         breed.setDescription(BreedName.BREED_DESCRIPTION);
@@ -32,7 +32,7 @@ public class ResultSetToEntityConverter {
 
     public static Breed convertToBreed(ResultSet resultSet) throws SQLException {
         Breed breed = new Breed();
-        breed.setId(resultSet.getInt(BreedName.ID));
+        breed.setId(resultSet.getLong(BreedName.ID));
         breed.setBreedId(resultSet.getString(BreedName.BREED_ID));
         breed.setName(resultSet.getString(BreedName.BREED_NAME));
         breed.setDescription(resultSet.getString(BreedName.BREED_DESCRIPTION));
