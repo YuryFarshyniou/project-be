@@ -1,2 +1,7 @@
 /.idea/
 /out/
+/project-web/target/
+/project-utils/target/
+/project-service/target/
+/project-dto/target/
+/project-domain/target/
