@@ -6,7 +6,7 @@ public class BreedName extends EntityName {
     private BreedName() {
     }
 
-    public static final String BREED_ID = "breed_id";
+    public static final String BREED_SHORT = "breed_short";
     public static final String BREED_NAME = "breed_name";
     public static final String BREED_DESCRIPTION = "breed_description";
     public static final String BREED_TEMPERAMENT = "breed_temperament";

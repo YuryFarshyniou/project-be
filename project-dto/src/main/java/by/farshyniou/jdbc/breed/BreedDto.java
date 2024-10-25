@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class BreedDto {
     private Long id;
-    private String breedId;
+    private String breedShort;
     private String name;
     private String temperament;
     private String origin;
@@ -18,10 +18,10 @@ public class BreedDto {
     }
 
     @JsonCreator
-    public BreedDto(@JsonProperty("id") String breedId, @JsonProperty("name") String name, @JsonProperty("temperament") String temperament, @JsonProperty("origin")
+    public BreedDto(@JsonProperty("id") String breedShort, @JsonProperty("name") String name, @JsonProperty("temperament") String temperament, @JsonProperty("origin")
     String origin, @JsonProperty("country_code") String countryCode, @JsonProperty("description") String description, @JsonProperty("life_span") String lifeSpan, @JsonProperty("wikipedia_url")
                     String wikipediaUrl) {
-        this.breedId = breedId;
+        this.breedShort = breedShort;
         this.name = name;
         this.temperament = temperament;
         this.origin = origin;
@@ -31,12 +31,12 @@ public class BreedDto {
         this.wikipediaUrl = wikipediaUrl;
     }
 
-    public String getBreedId() {
-        return breedId;
+    public String getBreedShort() {
+        return breedShort;
     }
 
-    public void setBreedId(String breedId) {
-        this.breedId = breedId;
+    public void setBreedShort(String breedShort) {
+        this.breedShort = breedShort;
     }
 
     public String getName() {
@@ -107,7 +107,7 @@ public class BreedDto {
     public String toString() {
         return "BreedDto{" +
                "id=" + id +
-               ", breedId='" + breedId + '\'' +
+               ", breedId='" + breedShort + '\'' +
                ", name='" + name + '\'' +
                ", temperament='" + temperament + '\'' +
                ", origin='" + origin + '\'' +

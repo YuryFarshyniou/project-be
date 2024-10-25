@@ -13,8 +13,8 @@ public class ToEntityConverter {
         Cat cat = new Cat();
         cat.setCatId(catDto.getCatId());
         cat.setUrl(catDto.getUrl());
-        cat.setBreedId(catDto.getBreedId());
-        if (catDto.getId() != 0) {
+        cat.setBreed(ToEntityConverter.toBreedEntity(catDto.getBreedDto()));
+        if (catDto.getId() != null) {
             cat.setId(catDto.getId());
         }
         return cat;
@@ -24,7 +24,7 @@ public class ToEntityConverter {
     public static Breed toBreedEntity(BreedDto breedDto) {
         Breed breed = new Breed();
         breed.setId(breedDto.getId());
-        breed.setBreedId(breedDto.getBreedId());
+        breed.setBreedShort(breedDto.getBreedShort());
         breed.setName(breedDto.getName());
         breed.setTemperament(breedDto.getTemperament());
         breed.setOrigin(breedDto.getOrigin());

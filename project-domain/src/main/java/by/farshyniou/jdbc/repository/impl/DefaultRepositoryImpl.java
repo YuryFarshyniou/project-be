@@ -29,17 +29,18 @@ public class DefaultRepositoryImpl implements DefaultRepository {
     @Override
     public void insertIntoTablesFromApi(List<CatApi> cats) {
         try (Connection connection = JdbcConnection.getConnection()) {
+            PreparedStatement insertIntoCatStatement = connection.prepareStatement(Queries.INSERT_INTO_CAT);
             cats.forEach(catApi -> {
                 try {
                     BreedDto breedDto = catApi.getBreeds().getFirst();
-                    PreparedStatement selectFromBreedStatement = connection.prepareStatement(Queries.SELECT_BREED_ID_ID_FROM_BREED_WITH_BREED_ID);
+                    PreparedStatement selectFromBreedStatement = connection.prepareStatement(Queries.SELECT_ID_FROM_BREED_WITH_BREED_ID);
                     selectFromBreedStatement.setFetchSize(5);
-                    selectFromBreedStatement.setString(1, breedDto.getBreedId());
+                    selectFromBreedStatement.setString(1, breedDto.getBreedShort());
                     ResultSet selectResulSet = selectFromBreedStatement.executeQuery();
                     Long breedId = null;
                     if (!selectResulSet.next()) {
                         PreparedStatement preparedStatement = connection.prepareStatement(Queries.INSERT_INTO_BREED, Statement.RETURN_GENERATED_KEYS);
-                        preparedStatement.setString(1, breedDto.getBreedId());
+                        preparedStatement.setString(1, breedDto.getBreedShort());
                         preparedStatement.setString(2, breedDto.getName());
                         preparedStatement.setString(3, breedDto.getTemperament());
                         preparedStatement.setString(4, breedDto.getOrigin());
@@ -53,24 +54,24 @@ public class DefaultRepositoryImpl implements DefaultRepository {
                             breedId = id.getLong(1);
                             breedDto.setId(breedId);
                         }
-                        LOGGER.info("Breed with id = {}  was added to db", breedDto.getBreedId());
+                        LOGGER.info("Breed with id = {}  was added to db", breedDto.getBreedShort());
                         preparedStatement.close();
                     } else {
                         breedId = selectResulSet.getLong("id");
                     }
-                    PreparedStatement insertIntoCatStatement = connection.prepareStatement(Queries.INSERT_INTO_CAT);
                     insertIntoCatStatement.setString(1, catApi.getCatId());
                     insertIntoCatStatement.setString(2, catApi.getUrl());
                     insertIntoCatStatement.setLong(3, breedId);
-                    insertIntoCatStatement.executeUpdate();
-                    LOGGER.info("Cat with id = {}  was added to db with breed = {}", catApi.getCatId(), breedDto.getBreedId());
+                    insertIntoCatStatement.addBatch();
+                    LOGGER.info("Cat with id = {}  was added to db with breed = {}", catApi.getCatId(), breedDto.getBreedShort());
                     selectFromBreedStatement.close();
-                    insertIntoCatStatement.close();
                 } catch (SQLException e) {
                     LOGGER.error("Error during inserting Cat or Breed entities from API, {}", e.getMessage());
                     throw new RepositoryException(e.getMessage());
                 }
             });
+            insertIntoCatStatement.executeBatch();
+            insertIntoCatStatement.close();
         } catch (SQLException e) {
             LOGGER.error("Error during inserting values from API, {}", e.getMessage());
             throw new RepositoryException(e.getMessage());

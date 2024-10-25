@@ -1,19 +1,20 @@
 package by.farshyniou.jdbc.cat;
 
+import by.farshyniou.jdbc.breed.BreedDto;
+
 public class CatDto {
     private Long id;
-    private String url;
     private String catId;
-    private Long breedId;
+    private String url;
+    private BreedDto breedDto;
 
     public CatDto() {
     }
 
-    public CatDto(Long id, String url, String catId, Long breedId) {
-        this.id = id;
-        this.url = url;
+    public CatDto(String catId, String url, BreedDto breedDto) {
         this.catId = catId;
-        this.breedId = breedId;
+        this.url = url;
+        this.breedDto = breedDto;
     }
 
     public Long getId() {
@@ -40,11 +41,21 @@ public class CatDto {
         this.catId = catId;
     }
 
-    public Long getBreedId() {
-        return breedId;
+    public BreedDto getBreedDto() {
+        return breedDto;
     }
 
-    public void setBreedId(Long breedId) {
-        this.breedId = breedId;
+    public void setBreedDto(BreedDto breedDto) {
+        this.breedDto = breedDto;
+    }
+
+    @Override
+    public String toString() {
+        return "CatDto{" +
+               "id=" + id +
+               ", catId='" + catId + '\'' +
+               ", url='" + url + '\'' +
+               ", breedDto=" + breedDto +
+               '}';
     }
 }

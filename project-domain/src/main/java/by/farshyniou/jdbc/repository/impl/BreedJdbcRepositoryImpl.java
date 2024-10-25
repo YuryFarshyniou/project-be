@@ -85,6 +85,11 @@ public class BreedJdbcRepositoryImpl implements JdbcRepositoryWithBreedFilter<Lo
     }
 
     @Override
+    public boolean insert(Breed entity) {
+        return false;
+    }
+
+    @Override
     public List<Breed> findAllWithBreedFilter(BreedFilter filter) {
         List<Object> parameters = new ArrayList<>();
         List<String> whereSql = new ArrayList<>();

@@ -18,4 +18,6 @@ public interface JdbcRepository<K, E> {
 
     Boolean update(E entity);
 
+    boolean insert(E entity);
+
 }

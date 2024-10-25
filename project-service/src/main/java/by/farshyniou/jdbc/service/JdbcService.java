@@ -15,7 +15,8 @@ public interface JdbcService<K, E> {
 
     E findById(Long id);
 
-    boolean update(E entity);
+    boolean update(E dto);
 
+    boolean insert(E dto);
 
 }

@@ -13,7 +13,7 @@ public final class ToDtoConverter {
         BreedDto breedDto = new BreedDto();
         breedDto.setId(breed.getId());
         breedDto.setName(breed.getName());
-        breedDto.setBreedId(breed.getBreedId());
+        breedDto.setBreedShort(breed.getBreedShort());
         breedDto.setDescription(breed.getDescription());
         breedDto.setCountryCode(breed.getCountryCode());
         breedDto.setLifeSpan(breed.getLifeSpan());
@@ -29,7 +29,7 @@ public final class ToDtoConverter {
         catDto.setId(cat.getId());
         catDto.setCatId(cat.getCatId());
         catDto.setUrl(cat.getUrl());
-        catDto.setBreedId(catDto.getBreedId());
+        catDto.setBreedDto(ToDtoConverter.convertToBreedDto(cat.getBreed()));
         return catDto;
     }
 

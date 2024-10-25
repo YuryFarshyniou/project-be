@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Breed {
     private Long id;
-    private String breedId;
+    private String breedShort;
     private String name;
     private String temperament;
     private String origin;
@@ -19,12 +19,12 @@ public class Breed {
     public Breed() {
     }
 
-    public String getBreedId() {
-        return breedId;
+    public String getBreedShort() {
+        return breedShort;
     }
 
-    public void setBreedId(String breedId) {
-        this.breedId = breedId;
+    public void setBreedShort(String breedShort) {
+        this.breedShort = breedShort;
     }
 
     public String getName() {
@@ -103,7 +103,7 @@ public class Breed {
     public String toString() {
         return "Breed{" +
                "id=" + id +
-               ", breedId='" + breedId + '\'' +
+               ", breedId='" + breedShort + '\'' +
                ", name='" + name + '\'' +
                ", temperament='" + temperament + '\'' +
                ", origin='" + origin + '\'' +

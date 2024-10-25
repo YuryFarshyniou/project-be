@@ -63,4 +63,9 @@ public class CatJdbcServiceImpl implements JdbcService<Long, CatDto> {
     public boolean update(CatDto catDto) {
         return CatJdbcRepositoryImpl.getInstance().update(ToEntityConverter.toCatEntity(catDto));
     }
+
+    @Override
+    public boolean insert(CatDto dto) {
+        return CatJdbcRepositoryImpl.getInstance().insert(ToEntityConverter.toCatEntity(dto));
+    }
 }

@@ -1,10 +1,12 @@
 package by.farshyniou.jdbc.entity.cat;
+import by.farshyniou.jdbc.entity.breed.Breed;
+
 
 public class Cat {
     private Long id;
     private String url;
     private String catId;
-    private Long breedId;
+    private Breed breed;
 
     public Cat() {
     }
@@ -33,19 +35,17 @@ public class Cat {
         this.id = id;
     }
 
-    public long getBreedId() {
-        return breedId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public void setBreedId(long breedId) {
-        this.breedId = breedId;
+    public Breed getBreed() {
+        return breed;
     }
 
-    @Override
-    public String toString() {
-        return "Cat{" +
-               "id=" + id +
-               ", url='" + url + '\'' +
-               ", catId='" + catId + '\'' + '}';
+    public void setBreed(Breed breed) {
+        this.breed = breed;
     }
+
+
 }

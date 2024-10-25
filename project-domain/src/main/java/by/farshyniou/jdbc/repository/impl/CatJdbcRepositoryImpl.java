@@ -98,12 +98,26 @@ public class CatJdbcRepositoryImpl implements JdbcRepository<Long, Cat> {
              PreparedStatement prStatement = connection.prepareStatement(Queries.UPDATE_CAT)) {
             prStatement.setString(1, cat.getCatId());
             prStatement.setString(2, cat.getUrl());
-            prStatement.setLong(3, cat.getBreedId());
+            prStatement.setLong(3, cat.getBreed().getId());
             prStatement.setLong(4, cat.getId());
             return prStatement.executeUpdate() > 0;
         } catch (SQLException exception) {
             LOGGER.error("Error during updating Cat with id={}, {}", cat.getId(), exception.getMessage());
             throw new RepositoryException(exception.getMessage());
+        }
+    }
+
+    @Override
+    public boolean insert(Cat cat) {
+        try (Connection connection = JdbcConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(Queries.INSERT_INTO_CAT)) {
+            preparedStatement.setString(1, cat.getCatId());
+            preparedStatement.setString(2, cat.getUrl());
+            preparedStatement.setLong(3, cat.getBreed().getId());
+            return preparedStatement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            LOGGER.error("Error during inserting into Cat table, {}", e.getMessage());
+            throw new RepositoryException(e.getMessage());
         }
     }
 }

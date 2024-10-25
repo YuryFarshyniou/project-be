@@ -18,8 +18,8 @@ public class ResultSetToEntityConverter {
         cat.setCatId(resultSet.getString(CatName.CAT_ID));
         cat.setUrl(resultSet.getString(CatName.CAT_URL));
         Breed breed = new Breed();
-        breed.setId(resultSet.getLong(4));
-        breed.setBreedId(resultSet.getString(BreedName.BREED_ID));
+        breed.setId(resultSet.getLong(CatName.BREED_ID));
+        breed.setBreedShort(resultSet.getString(BreedName.BREED_SHORT));
         breed.setName(BreedName.BREED_NAME);
         breed.setDescription(BreedName.BREED_DESCRIPTION);
         breed.setTemperament(BreedName.BREED_TEMPERAMENT);
@@ -27,13 +27,14 @@ public class ResultSetToEntityConverter {
         breed.setCountryCode(BreedName.BREED_COUNTRY_CODE);
         breed.setLifeSpan(BreedName.BREED_LIFE_SPAN);
         breed.setWikipediaUrl(BreedName.BREED_WIKIPEDIA_URL);
+        cat.setBreed(breed);
         return cat;
     }
 
     public static Breed convertToBreed(ResultSet resultSet) throws SQLException {
         Breed breed = new Breed();
         breed.setId(resultSet.getLong(BreedName.ID));
-        breed.setBreedId(resultSet.getString(BreedName.BREED_ID));
+        breed.setBreedShort(resultSet.getString(BreedName.BREED_SHORT));
         breed.setName(resultSet.getString(BreedName.BREED_NAME));
         breed.setDescription(resultSet.getString(BreedName.BREED_DESCRIPTION));
         breed.setTemperament(resultSet.getString(BreedName.BREED_TEMPERAMENT));

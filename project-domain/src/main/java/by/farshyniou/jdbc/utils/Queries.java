@@ -8,7 +8,7 @@ public final class Queries {
     public static final String CREATE_TABLE_BREED = """
                     Create table breed (
             id serial primary key,
-            breed_id varchar(255),
+            breed_short varchar(255),
             breed_name varchar(255),
             breed_temperament varchar(255),
             breed_origin varchar(255),
@@ -27,7 +27,7 @@ public final class Queries {
             references breed(id))""";
 
     public static final String INSERT_INTO_BREED_EXAMPLE = """
-                        INSERT INTO BREED (breed_id, breed_name, breed_temperament, breed_origin, breed_country_code, breed_description, breed_life_span, breed_wikipedia_url)
+                        INSERT INTO BREED (breed_short, breed_name, breed_temperament, breed_origin, breed_country_code, breed_description, breed_life_span, breed_wikipedia_url)
             VALUES ('XFG','Pers','Angry','Belarus','22','Some','10','url')
                         """;
     public static final String INSERT_INTO_CAT_EXAMPLE = """
@@ -54,16 +54,16 @@ public final class Queries {
             INSERT INTO CAT (cat_id, cat_url, breed_id) VALUES (?,?,?)
             """;
     public static final String INSERT_INTO_BREED = """
-            INSERT INTO BREED (breed_id, breed_name, breed_temperament,
+            INSERT INTO BREED (breed_short, breed_name, breed_temperament,
                    breed_origin, breed_country_code, breed_description,
                    breed_life_span, breed_wikipedia_url) VALUES (?,?,?,?,?,?,?,?) """;
 
-    public static final String SELECT_BREED_ID_ID_FROM_BREED_WITH_BREED_ID = """
-            select breed_id, id from breed where breed_id = ?
+    public static final String SELECT_ID_FROM_BREED_WITH_BREED_ID = """
+            select id from breed where breed_short = ?
             """;
 
     public static final String SELECT_FROM_BREED_WITH_BREED_ID = """
-                        select id, breed_id, breed_name, breed_temperament,
+                        select id, breed_short, breed_name, breed_temperament,
                                breed_origin, breed_country_code, breed_description,
                                breed_life_span, breed_wikipedia_url from breed
             where id = ?
@@ -74,7 +74,7 @@ public final class Queries {
                         """;
 
     public static final String SELECT_ALL_FROM_BREED = """
-                        SELECT id, breed_id, breed_name, breed_temperament, breed_origin, breed_country_code, breed_description, breed_life_span, breed_wikipedia_url
+                        SELECT id, breed_short, breed_name, breed_temperament, breed_origin, breed_country_code, breed_description, breed_life_span, breed_wikipedia_url
             FROM breed 
                         """;
 

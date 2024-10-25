@@ -7,7 +7,6 @@ import by.farshyniou.jdbc.entity.breed.Breed;
 import by.farshyniou.jdbc.exception.EntityNotFoundException;
 import by.farshyniou.jdbc.filter.BreedFilterDto;
 import by.farshyniou.jdbc.repository.impl.BreedJdbcRepositoryImpl;
-import by.farshyniou.jdbc.service.JdbcService;
 import by.farshyniou.jdbc.service.JdbcServiceWithBreedFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -59,6 +58,11 @@ public class BreedJdbcServiceImpl implements JdbcServiceWithBreedFilter<Long, Br
     @Override
     public boolean update(BreedDto breedDto) {
         return BreedJdbcRepositoryImpl.getInstance().update(ToEntityConverter.toBreedEntity(breedDto));
+    }
+
+    @Override
+    public boolean insert(BreedDto dto) {
+        return false;
     }
 
     @Override
